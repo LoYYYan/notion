@@ -5,29 +5,28 @@
   
   <!--css style-->
     <style>
-      #lbl {
-  padding: 5px;
-  padding: 10px;
+      #content {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  flex-direction: column; 
+}
+
+#lbl {
   line-height: 1.5;
   font-family: Inter, sans-serif;
   letter-spacing: 2px;
   font-size: xx-large;
   color: #37352f;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding-bottom:5px;
 }
 #date {
   font-size: large;
 }
-body {
-}
 
 #digital-clock {
-  width: 35%;
-  margin: auto;
   color: #37352f;
   font-family: Inter, sans-serif;
   font-size: large;
@@ -39,8 +38,10 @@ body {
 </head>
   
 <body>
+  <div id="content">
     <div id="lbl"></div>
    <div id = "digital-clock"> </div>
+  </div>
 </body>
 
   
