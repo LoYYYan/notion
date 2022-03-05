@@ -6,27 +6,14 @@
   <!--css style-->
     <style>
       #lbl {
-  height: 100vh;
-  /*  display: flex; 
-  flex-direction: column;
-  */
   padding: 5px;
-  /* margin: auto; */
   padding: 10px;
-  border: 3px solid #ececec;
-
-  /*text*/
   line-height: 1.5;
-
   font-family: Inter, sans-serif;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   font-size: xx-large;
   color: #37352f;
   text-align: center;
-  
-  
-  /*example*/
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,8 +23,15 @@
   font-size: large;
 }
 body {
-  /*  background-color: aliceblue;
-  */
+}
+
+#digital-clock {
+  width: 35%;
+  margin: auto;
+  color: #37352f;
+  font-family: Inter, sans-serif;
+  font-size: large;
+  text-align: center;
 }
 
     </style>
@@ -46,67 +40,102 @@ body {
   
 <body>
     <div id="lbl"></div>
+   <div id = "digital-clock"> </div>
 </body>
 
   
   <!--JS start-->
 <script>
-    var weekday = new Array(7);
-    weekday[0] = "Sunday";
-    weekday[1] = "Monday";
-    weekday[2] = "Tuesday";
-    weekday[3] = "Wednesday";
-    weekday[4] = "Thursday";
-    weekday[5] = "Friday";
-    weekday[6] = "Saturday";
+var weekday = new Array(7);
+weekday[0] = "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
 
-//month start
-const monthNames = ["Jan", "February", "Mar", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+const monthNames = [
+  "Jan",
+  "February",
+  "Mar",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
 ];
 
-//month ends
+var today = new Date();
+var hrs = today.getHours();
+var dayOfWeek = weekday[today.getDay()];
+var date =
+  +" " +
+  today.getDate() +
+  " " +
+  monthNames[today.getMonth()] +
+  " " +
+  today.getFullYear() +
+  ", " +
+  dayOfWeek;
 
-//edit date
-    var today = new Date();
-    var hrs = today.getHours();
-    var dayOfWeek = weekday[today.getDay()];
-    var date = +" " + today.getDate() +" " +monthNames[today.getMonth()]+' '+today.getFullYear() +", " +dayOfWeek;
+var greet;
 
-    var greet;
+if (hrs < 12) greet = "Good Morning  ";
+else if (hrs >= 12 && hrs <= 17) greet = "Good Afternoon ";
+else if (hrs >= 17 && hrs <= 24) greet = "Good Evening  ";
 
-    if (hrs < 12)
-        greet = 'Good Morning  ';
-    else if (hrs >= 12 && hrs <= 17)
-        greet = 'Good Afternoon ';
-    else if (hrs >= 17 && hrs <= 24)
-        greet = 'Good Evening  ';
+document.getElementById(
+  "lbl"
+).innerHTML = greet += `<div id="date">${date}</div>`;
 
-    document.getElementById('lbl').innerHTML =
-        greet+=`<div id="date">${date}</div>`;
-
-
-    
-/* original date display
-
-    var today = new Date();
-    var hrs = today.getHours();
-    var dayOfWeek = weekday[today.getDay()];
-    var date = dayOfWeek+" " + today.getDate() + "." +(today.getMonth()+1) +'.'+today.getFullYear()  ;
-
-    var greet;
-
-    if (hrs < 12)
-        greet = 'Good Morning  ';
-    else if (hrs >= 12 && hrs <= 17)
-        greet = 'Good Afternoon ';
-    else if (hrs >= 17 && hrs <= 24)
-        greet = 'Good Evening  ';
-
-    document.getElementById('lbl').innerHTML =
-        greet+=`<div id="date">${date}</div>`;
-        
-        */
+function Time() {
+ // Creating object of the Date class
+ var date = new Date();
+ // Get current hour
+ var hour = date.getHours();
+ // Get current minute
+ var minute = date.getMinutes();
+ // Variable to store AM / PM
+ var period = "";
+ // Assigning AM / PM according to the current hour
+ if (hour >= 12) {
+ period = "PM";
+ } else {
+ period = "AM";
+ }
+ // Converting the hour in 12-hour format
+ if (hour == 0) {
+ hour = 12;
+ } else {
+ if (hour > 12) {
+ hour = hour - 12;
+ }
+ }
+ // Updating hour, minute, and second
+ // if they are less than 10
+ hour = update(hour);
+ minute = update(minute);
+ // Adding time elements to the div
+ document.getElementById("digital-clock").innerText = hour + " : " + minute +" "+ period;
+ // Set Timer to 1 sec (1000 ms)
+ setTimeout(Time, 1000);
+}
+ // Function to update time elements if they are less than 10
+ // Append 0 before time elements if they are less than 10
+function update(t) {
+ if (t < 10) {
+ return "0" + t;
+ }
+ else {
+ return t;
+ }
+}
+Time();
 </script> 
    <!--JS ends-->
 </html>
